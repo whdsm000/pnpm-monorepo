@@ -4,5 +4,5 @@ export default [
     cnName: "admin",
     root: "admin",
     projectKey: "admin",
-  },
+  }
 ]

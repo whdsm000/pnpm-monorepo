@@ -7,16 +7,17 @@
  import vueJsx from '@vitejs/plugin-vue-jsx';
  import VitePluginCertificate from 'vite-plugin-mkcert';
  import vueSetupExtend from 'vite-plugin-vue-setup-extend';
-
+ import Pages from 'vite-plugin-pages'
  import { AutoRegistryComponents } from './component';
  import { AutoImportDeps } from './autoImport';
  import { ConfigCompressPlugin } from './compress';
 
  import { ConfigRestartPlugin } from './restart';
  import { ConfigProgressPlugin } from './progress';
-
+import {resolve} from 'path'
  export function createVitePlugins(isBuild: boolean) {
  
+  
    const vitePlugins: (PluginOption | PluginOption[])[] = [
      // vue支持
      vue(),
@@ -28,7 +29,12 @@
      VitePluginCertificate({
        source: 'coding',
      }),
-
+     Pages({
+      dirs:[
+        {dir:resolve(__dirname,'../../src/pages'),baseRoute:''}
+      ],
+      extensions: ['vue', 'md', 'jsx'],
+     })
    ];
  
    // 自动按需引入组件
